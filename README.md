@@ -202,6 +202,69 @@ This project is a demo for learning the Spring framework by implementing an e-co
   ```
 </details>
 
+### 3. getAllCategories
+- **Description:** Returns all the categories of product in the database
+- **Endpoint:** `/products/categories`
+- **HTTP Method:** GET
+<details>
+  <summary>Click here to view json output</summary>
+  
+  ```json
+[
+    "men's clothing",
+    "jewelery",
+    "electronics",
+    "women's clothing"
+]
+  ```
+</details>
+
+### 4. getProductByCategory
+- **Description:** Return all the products of specific category
+- **Endpoint:** `/products/category/{category_name}`
+- **HTTP Method:** GET
+- **Input:** `category` String
+<details>
+  <summary>Click here to view json output</summary>
+  
+  ```json
+[
+    {
+        "id": 5,
+        "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        "price": "695",
+        "category": "jewelery",
+        "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+        "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Solid Gold Petite Micropave ",
+        "price": "168",
+        "category": "jewelery",
+        "description": "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
+        "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"
+    },
+    {
+        "id": 7,
+        "title": "White Gold Plated Princess",
+        "price": "9.99",
+        "category": "jewelery",
+        "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
+        "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg"
+    },
+    {
+        "id": 8,
+        "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
+        "price": "10.99",
+        "category": "jewelery",
+        "description": "Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
+        "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg"
+    }
+]
+  ```
+</details>
+
 ## Setup Instructions
 To set up the project on your local system, follow these steps:
 
@@ -211,7 +274,7 @@ To set up the project on your local system, follow these steps:
 2. Navigate to the project directory:
    ```sh
    cd fakestore-product-service
-3. Open the project in your preferred IDE (e.g., IntelliJ IDEA, Eclipse)
+3. Open the project in your preferred IDE (e.g., IntelliJ IDEA, VS Code)
 5. Run the project:
    ```sh
    mvn spring-boot-run
