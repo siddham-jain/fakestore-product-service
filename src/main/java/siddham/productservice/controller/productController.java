@@ -25,4 +25,19 @@ public class productController {
         return psi.getProductById(id);
     }
 
+    @GetMapping("/categories")
+    public List<String> getAllCategories(){
+        return psi.getAllCategories();
+    }
+
+    @GetMapping("/category/{category}")
+    public List<Product> getProductByCategory(@PathVariable("category") String category){
+        if(category.equals("mensclothing")){
+            return psi.getProductByCategory("men's clothing");
+        } else if(category.equals("womensclothing")){
+            return psi.getProductByCategory("women's clothing");
+            }
+        return psi.getProductByCategory(category);
+    }
+
 }

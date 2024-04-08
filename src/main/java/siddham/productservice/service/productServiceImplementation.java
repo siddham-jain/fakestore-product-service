@@ -1,4 +1,7 @@
 package siddham.productservice.service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import siddham.productservice.model.Product;
 
@@ -51,4 +54,44 @@ public class productServiceImplementation implements productService {
         }
         return mapToProduct(productdto);
     }
+
+    @Override
+    public List<String> getAllCategories() {
+        RestTemplate restTemplate = new RestTemplate();
+        ProductDTO[] productsdto = restTemplate.getForObject(url, ProductDTO[].class);
+        if(productsdto == null){
+            System.out.println("There are no products");
+            return Collections.emptyList();
+        }
+        List<String> categories = new ArrayList<>();
+        for(ProductDTO pdto : productsdto){
+            if(pdto == null){
+                System.out.println("There are no products");
+                return Collections.emptyList();
+            }
+            String cat = pdto.getCategory();
+            if(!categories.contains(cat)){
+                categories.add(cat);
+            }
+        }
+        return categories;
+    }
+
+    @Override
+    public List<Product> getProductByCategory(String category){
+        RestTemplate restTemplate = new RestTemplate();
+        ProductDTO[] pdto = restTemplate.getForObject(url, ProductDTO[].class);
+//        category = filter(category);
+        List<Product> products = new ArrayList<>();
+        if(pdto == null){
+            return null;
+        }
+        for(ProductDTO dto : pdto){
+            if(dto.getCategory().equals(category)){
+                products.add(mapToProduct(dto));
+            }
+        }
+        return products;
+    }
+
 }
