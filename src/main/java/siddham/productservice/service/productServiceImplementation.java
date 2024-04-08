@@ -1,4 +1,6 @@
 package siddham.productservice.service;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import siddham.productservice.dtos.ProductDTO;
 @Service
 public class productServiceImplementation implements productService {
     String url = "https://fakestoreapi.com/products";
+    RestTemplate restTemplate = new RestTemplate();
 
     public Product mapToProduct(ProductDTO productdto) {
         Product product = new Product();
@@ -26,7 +29,7 @@ public class productServiceImplementation implements productService {
     }
     @Override
     public List<Product> getAllProducts() {
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
         ProductDTO[] productsdto = restTemplate.getForObject(url, ProductDTO[].class);
         if(productsdto == null){
             System.out.println("There are no products");
@@ -46,7 +49,7 @@ public class productServiceImplementation implements productService {
 
     @Override
     public Product getProductById(Long id) {
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
         ProductDTO productdto = restTemplate.getForObject(url + "/" + id, ProductDTO.class);
         if(productdto == null){
             System.out.println("There is no product with this id");
@@ -57,7 +60,7 @@ public class productServiceImplementation implements productService {
 
     @Override
     public List<String> getAllCategories() {
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
         ProductDTO[] productsdto = restTemplate.getForObject(url, ProductDTO[].class);
         if(productsdto == null){
             System.out.println("There are no products");
@@ -79,9 +82,8 @@ public class productServiceImplementation implements productService {
 
     @Override
     public List<Product> getProductByCategory(String category){
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
         ProductDTO[] pdto = restTemplate.getForObject(url, ProductDTO[].class);
-//        category = filter(category);
         List<Product> products = new ArrayList<>();
         if(pdto == null){
             return null;
