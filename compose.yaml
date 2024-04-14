@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: productdb
+      MYSQL_USER: fakeuser
+      MYSQL_PASSWORD: fakepwd
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
