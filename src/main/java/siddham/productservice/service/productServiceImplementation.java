@@ -1,10 +1,12 @@
 package siddham.productservice.service;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.core.ParameterizedTypeReference;
+//import org.springframework.http.HttpMethod;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatusCode;
+//import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestTemplate;
+//import siddham.productservice.model.Category;
 import siddham.productservice.model.Product;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class productServiceImplementation implements productService {
         product.setTitle(productdto.getTitle());
         product.setPrice(productdto.getPrice());
         product.setDescription(productdto.getDescription());
-        product.setCategory(productdto.getCategory());
+//        product.setCategory(productdto.getCategory());
         product.setImage(productdto.getImage());
         return product;
     }
@@ -60,24 +62,7 @@ public class productServiceImplementation implements productService {
 
     @Override
     public List<String> getAllCategories() {
-//        RestTemplate restTemplate = new RestTemplate();
-        ProductDTO[] productsdto = restTemplate.getForObject(url, ProductDTO[].class);
-        if(productsdto == null){
-            System.out.println("There are no products");
-            return Collections.emptyList();
-        }
-        List<String> categories = new ArrayList<>();
-        for(ProductDTO pdto : productsdto){
-            if(pdto == null){
-                System.out.println("There are no products");
-                return Collections.emptyList();
-            }
-            String cat = pdto.getCategory();
-            if(!categories.contains(cat)){
-                categories.add(cat);
-            }
-        }
-        return categories;
+        return null;
     }
 
     @Override
@@ -89,11 +74,16 @@ public class productServiceImplementation implements productService {
             return null;
         }
         for(ProductDTO dto : pdto){
-            if(dto.getCategory().equals(category)){
+            if(category.equals(dto.getCategory().getTitle())){
                 products.add(mapToProduct(dto));
             }
         }
         return products;
+    }
+
+    @Override
+    public Product createProduct(Product product) {
+        return null;
     }
 
 }

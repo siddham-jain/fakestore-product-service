@@ -1,19 +1,19 @@
 package siddham.productservice.controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import siddham.productservice.customexceptions.ProductNotFoundException;
 import siddham.productservice.model.Product;
-import siddham.productservice.service.productServiceImplementation;
+import siddham.productservice.service.SelfProductService;
+import siddham.productservice.service.productService;
+//import siddham.productservice.service.productServiceImplementation;
 import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class productController {
 
-    private productServiceImplementation psi;
+    private final productService psi;
 
-    productController(productServiceImplementation productserviceimplementation){
-        this.psi = productserviceimplementation;
+    productController(productService ps){
+        this.psi = ps;
     }
     @GetMapping
     public List<Product> getAllProducts() {
@@ -21,7 +21,7 @@ public class productController {
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
+    public Product getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
         return psi.getProductById(id);
     }
 
@@ -38,6 +38,11 @@ public class productController {
             return psi.getProductByCategory("women's clothing");
             }
         return psi.getProductByCategory(category);
+    }
+
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) throws ProductNotFoundException {
+        return psi.createProduct(product);
     }
 
 }
